@@ -1,0 +1,3 @@
+[submodule "f4se-mirror"]
+	path = f4se-mirror
+	url = ../f4se-mirror.git
