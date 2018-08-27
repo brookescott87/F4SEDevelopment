@@ -1,3 +1,6 @@
 [submodule "f4se-mirror"]
 	path = f4se-mirror
 	url = ../f4se-mirror.git
+[submodule "fo4-vertibird-jump"]
+	path = fo4-vertibird-jump
+	url = ../fo4-vertibird-jump.git
