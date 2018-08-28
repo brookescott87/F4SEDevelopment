@@ -4,3 +4,6 @@
 [submodule "fo4-vertibird-jump"]
 	path = fo4-vertibird-jump
 	url = ../fo4-vertibird-jump.git
+[submodule "BetterConsole"]
+	path = BetterConsole
+	url = ../BetterConsole.git
