@@ -20,9 +20,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "f4se_loader_common", "f4se-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "F4SELibs", "F4SELibs", "{D71DDD1E-6C75-452C-8262-5B68EFE08999}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "runplugin", "runplugin\runplugin\runplugin.vcxproj", "{14134DC7-7BC1-4CA5-A341-CFD34C658090}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "doorstop", "doorstop\doorstop.vcxproj", "{51D4A14C-C3AE-42B3-AE5C-2011A659C508}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "runplugin", "runplugin\runplugin.vcxproj", "{14134DC7-7BC1-4CA5-A341-CFD34C658090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,12 +78,6 @@ Global
 		{BE858737-949E-48CF-ADF9-079389049B57}.Ex Release|x64.Build.0 = Debug|x64
 		{BE858737-949E-48CF-ADF9-079389049B57}.Release|x64.ActiveCfg = Debug|x64
 		{BE858737-949E-48CF-ADF9-079389049B57}.Release|x64.Build.0 = Debug|x64
-		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Debug|x64.ActiveCfg = Debug|x64
-		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Debug|x64.ActiveCfg = Debug|x64
-		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Debug|x64.Build.0 = Debug|x64
-		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Release|x64.ActiveCfg = Debug|x64
-		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Release|x64.Build.0 = Debug|x64
-		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Release|x64.ActiveCfg = Debug|x64
 		{51D4A14C-C3AE-42B3-AE5C-2011A659C508}.Debug|x64.ActiveCfg = Debug|x64
 		{51D4A14C-C3AE-42B3-AE5C-2011A659C508}.Debug|x64.Build.0 = Debug|x64
 		{51D4A14C-C3AE-42B3-AE5C-2011A659C508}.Ex Debug|x64.ActiveCfg = Debug|x64
@@ -92,6 +86,14 @@ Global
 		{51D4A14C-C3AE-42B3-AE5C-2011A659C508}.Ex Release|x64.Build.0 = Release|x64
 		{51D4A14C-C3AE-42B3-AE5C-2011A659C508}.Release|x64.ActiveCfg = Release|x64
 		{51D4A14C-C3AE-42B3-AE5C-2011A659C508}.Release|x64.Build.0 = Release|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Debug|x64.ActiveCfg = Debug|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Debug|x64.Build.0 = Debug|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Debug|x64.ActiveCfg = Debug|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Debug|x64.Build.0 = Debug|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Release|x64.ActiveCfg = Release|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Ex Release|x64.Build.0 = Release|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Release|x64.ActiveCfg = Release|x64
+		{14134DC7-7BC1-4CA5-A341-CFD34C658090}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -98,13 +98,13 @@
     <ClCompile Include="runplugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\f4se-mirror\src\common\common_vc11.vcxproj">
+    <ProjectReference Include="..\f4se-mirror\src\common\common_vc11.vcxproj">
       <Project>{d4c128a1-73dc-4941-a453-ce55af239ba8}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\f4se-mirror\src\f4se\f4se\f4se.vcxproj">
+    <ProjectReference Include="..\f4se-mirror\src\f4se\f4se\f4se.vcxproj">
       <Project>{a236f69d-8ff9-4491-ac5f-45bf49448bbe}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\f4se-mirror\src\f4se\f4se_common\f4se_common.vcxproj">
+    <ProjectReference Include="..\f4se-mirror\src\f4se\f4se_common\f4se_common.vcxproj">
       <Project>{20c6411c-596f-4b85-be4e-8bc91f59d8a6}</Project>
     </ProjectReference>
   </ItemGroup>
