@@ -61,6 +61,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)f4se-mirror\src;$(SolutionDir)/f4se-mirror\src\f4se;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <SupportJustMyCode>false</SupportJustMyCode>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
