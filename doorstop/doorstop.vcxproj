@@ -45,9 +45,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetExt>.dll</TargetExt>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetExt>.dll</TargetExt>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -58,11 +60,23 @@
       <AdditionalIncludeDirectories>$(SolutionDir)f4se-mirror\src;$(SolutionDir)f4se-mirror\src\f4se;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SupportJustMyCode>false</SupportJustMyCode>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <FixedBaseAddress>true</FixedBaseAddress>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <CustomBuildStep />
+    <PreBuildEvent>
+      <Command>if not exist "$(F4SEPluginDir)" mkdir "$(F4SEPluginDir)"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Will deploy targets to $(F4SEPluginDir)</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -79,10 +93,21 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <FixedBaseAddress>0x40000000000</FixedBaseAddress>
     </Link>
+    <PreBuildEvent>
+      <Command>if not exist "$(F4SEPluginDir)" mkdir "$(F4SEPluginDir)"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Will deploy targets to $(F4SEPluginDir)</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="doorstop.cpp" />
+    <ClCompile Include="steamantiantidebug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
@@ -90,12 +115,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <InstallFiles Include="$(TargetPath)" />
+  <ItemGroup>
+    <InstallSrcFile Include="$(TargetPath)" />
+    <InstallDestFile Include="$(F4SEPluginDir)$(TargetFileName)" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <InstallSrcFiles Include="$(TargetPath);$(TargetDir)$(TargetName).pdb" />
-    <InstallDestFiles Include="$(F4SEPluginDir)$(TargetFileName);$(F4SEPluginDir)$(TargetName).pdb" />
+    <InstallSrcFile Include="$(TargetDir)$(TargetName).pdb" />
+    <InstallDestFile Include="$(F4SEPluginDir)$(TargetName).pdb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\f4se-mirror\src\common\common_vc11.vcxproj">
@@ -105,11 +131,11 @@
       <Project>{a236f69d-8ff9-4491-ac5f-45bf49448bbe}</Project>
     </ProjectReference>
   </ItemGroup>
-  <Target Name="CreateInstallFolder" AfterTargets="Build">
-    <MakeDir Directories="$(F4SEPluginDir)" />
-  </Target>
-  <Target Name="InstallFiles" AfterTargets="Build" DependsOnTargets="CreateInstallFolder" Inputs="@(InstallSrcFiles)" Outputs="@(InstallDestFiles)">
-    <Copy SourceFiles="@(InstallSrcFiles)" DestinationFiles="@(InstallDestFiles)" />
+  <ItemGroup>
+    <None Include="exports.def" />
+  </ItemGroup>
+  <Target Name="InstallFiles" AfterTargets="Build" Inputs="@(InstallSrcFile)" Outputs="@(InstallDestFile)">
+    <Copy SourceFiles="@(InstallSrcFile)" DestinationFiles="@(InstallDestFile)" />
     <Message Text="Installing files to ${F4SEPluginDir)" />
   </Target>
 </Project>

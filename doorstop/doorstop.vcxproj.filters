@@ -18,10 +18,18 @@
     <ClCompile Include="doorstop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="steamantiantidebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="exports.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
