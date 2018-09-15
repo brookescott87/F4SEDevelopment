@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# Visual Studio Program Databases
+*.pdb
+
 
 # Compiled Papyrus scripts
 *.pex
