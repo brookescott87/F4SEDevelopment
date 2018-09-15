@@ -40,6 +40,11 @@
 ~AutoRecover.*.vcxproj
 *.vcxproj.user
 
+# Emacs cruft
+*~
+.*~
+\#*\#
+
 # Created directories
 
 Release/
