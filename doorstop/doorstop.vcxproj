@@ -30,6 +30,9 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <InstallType>F4SEPlugin</InstallType>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -39,10 +42,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros">
-    <Fallout4Path>$(SolutionDir)\output</Fallout4Path>
-    <F4SEPluginDir>$(Fallout4Path)Data\F4SE\Plugins\</F4SEPluginDir>
-  </PropertyGroup>
+  <Import Project="$(SolutionPath).props" Condition="Exists('$(SolutionPath).props')" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetExt>.dll</TargetExt>
     <LinkIncremental>false</LinkIncremental>
@@ -71,12 +71,6 @@
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <CustomBuildStep />
-    <PreBuildEvent>
-      <Command>if not exist "$(F4SEPluginDir)" mkdir "$(F4SEPluginDir)"</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Will deploy targets to $(F4SEPluginDir)</Message>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -98,12 +92,6 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <FixedBaseAddress>0x40000000000</FixedBaseAddress>
     </Link>
-    <PreBuildEvent>
-      <Command>if not exist "$(F4SEPluginDir)" mkdir "$(F4SEPluginDir)"</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Will deploy targets to $(F4SEPluginDir)</Message>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="doorstop.cpp" />
@@ -116,14 +104,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <InstallSrcFile Include="$(TargetPath)" />
-    <InstallDestFile Include="$(F4SEPluginDir)$(TargetFileName)" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <InstallSrcFile Include="$(TargetDir)$(TargetName).pdb" />
-    <InstallDestFile Include="$(F4SEPluginDir)$(TargetName).pdb" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\f4se-mirror\src\common\common_vc11.vcxproj">
       <Project>{d4c128a1-73dc-4941-a453-ce55af239ba8}</Project>
     </ProjectReference>
@@ -134,8 +114,4 @@
   <ItemGroup>
     <None Include="exports.def" />
   </ItemGroup>
-  <Target Name="InstallFiles" AfterTargets="Build" Inputs="@(InstallSrcFile)" Outputs="@(InstallDestFile)">
-    <Copy SourceFiles="@(InstallSrcFile)" DestinationFiles="@(InstallDestFile)" />
-    <Message Text="Installing files to ${F4SEPluginDir)" />
-  </Target>
 </Project>
