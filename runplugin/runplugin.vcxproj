@@ -90,6 +90,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="MyPluginManager.cpp" />
     <ClCompile Include="runplugin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +104,10 @@
     <ProjectReference Include="..\f4se-mirror\src\f4se\f4se_common\f4se_common.vcxproj">
       <Project>{20c6411c-596f-4b85-be4e-8bc91f59d8a6}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="MyPluginManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
