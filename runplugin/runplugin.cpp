@@ -7,7 +7,7 @@
 #include <common/IDebugLog.h>
 #include <f4se/PluginAPI.h>
 #include "ImageLoader.h"
-#include "MyPluginManager.h"
+#include "Plugin.h"
 
 INT_PTR qwFalloutBase;
 INT_PTR qwProgramBase = (INT_PTR)GetModuleHandle(NULL);
@@ -24,7 +24,23 @@ int main(int argc, char **argv)
 		_MESSAGE("Program Base = %016llX", qwProgramBase);
 		_MESSAGE("Fallout Base = %016llX", qwFalloutBase);
 		_MESSAGE("Module Fixup = %016llX", qwModuleFixup);
-
-		myPluginManager.Init(qwProgramBase, qwFalloutBase);
 	}
+	else
+		return 1;
+
+	Plugin p("place.dll");
+
+	INT_PTR *qwModulePtr = (INT_PTR *)((INT_PTR)(p.m_handle) + 0x75d00);
+	if (*qwModulePtr == qwProgramBase) {
+		_MESSAGE("Applying fixup to program references");
+		for (int i = 0; i < 6; ++i) {
+			INT_PTR qwOldRef = qwModulePtr[i];
+			INT_PTR qwNewRef = qwOldRef + qwModuleFixup;
+			qwModulePtr[i] = qwNewRef;
+			_MESSAGE("  %p: %p -> %p", &qwModulePtr[i], qwOldRef, qwNewRef);
+		}
+	}
+
+	p.SafeQuery();
+	p.SafeLoad();
 }
