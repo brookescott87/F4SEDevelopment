@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemDefinitionGroup>
-    <PreBuildEvent>
-      <Command>if not exist "$(InstallDir)" mkdir "$(InstallDir)"</Command>
-    </PreBuildEvent>
-    <PreBuildEvent>
-      <Message>Will deploy $(TargetName) to $(InstallDir)</Message>
-    </PreBuildEvent>
-  </ItemDefinitionGroup>
   <ItemGroup>
     <InstallSrcFile Include="$(TargetPath)" />
     <InstallDestFile Include="$(InstallDir)$(TargetFileName)" />
@@ -16,8 +8,14 @@
     <InstallSrcFile Include="$(TargetDir)$(TargetName).pdb" />
     <InstallDestFile Include="$(InstallDir)$(TargetName).pdb" />
   </ItemGroup>
-  <Target Name="InstallFiles" AfterTargets="Build" Inputs="@(InstallSrcFile)" Outputs="@(InstallDestFile)">
-    <Copy SourceFiles="@(InstallSrcFile)" DestinationFiles="@(InstallDestFile)" />
-    <Message Text="Installing files to $(InstallDir)" />
+  <Target Name="ValidateInstallDir">
+    <Error Condition="!HasTrailingSlash('$(InstallDir)')"
+	   Text="Installation directory $(InstallDir) has no trailing slash" />
+    <Error Condition="!exists('$(InstallDir)')"
+	   Text="Installation directory $(InstallDir) does not exist" />
+  </Target>
+  <Target Name="InstallFiles" AfterTargets="Build" DependsOnTargets="ValidateInstallDir" Inputs="@(InstallSrcFile)" Outputs="@(InstallDestFile)">
+    <Message Text="Installing files to $(InstallDir)" Importance="high" />
+    <Copy SourceFiles="@(InstallSrcFile)" DestinationFolder="$(InstallDir)" />
   </Target>
 </Project>
