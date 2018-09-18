@@ -5,7 +5,7 @@
       <Command>if not exist "$(InstallDir)" mkdir "$(InstallDir)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Will deploy targets to $(InstallDir)</Message>
+      <Message>Will deploy $(TargetName) to $(InstallDir)</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
