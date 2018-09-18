@@ -41,6 +41,8 @@ int main(int argc, char **argv)
 		}
 	}
 
-	p.SafeQuery();
-	p.SafeLoad();
+	p.Query();
+	p.Load();
+
+	_MESSAGE("Plugin state: %d", p.GetState());
 }

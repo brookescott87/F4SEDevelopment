@@ -37,6 +37,7 @@ Plugin::Plugin(const char *pluginPath)
 bool Plugin::Query()
 {
 	if (m_state == k_PluginState_Initial) {
+		m_state = k_PluginState_Failed;
 		if (m_query(&g_F4SEInterface, &m_info)) {
 			m_state = k_PluginState_Valid;
 			return true;
@@ -46,36 +47,14 @@ bool Plugin::Query()
 	return false;
 }
 
-bool Plugin::SafeQuery()
-{
-	__try {
-		return Query();
-	}
-	__except(EXCEPTION_EXECUTE_HANDLER) {
-		m_state = k_PluginState_Failed;
-	}
-	return false;
-}
-
 bool Plugin::Load()
 {
 	if (m_state == k_PluginState_Valid) {
+		m_state = k_PluginState_Failed;
 		if (m_load(&g_F4SEInterface)) {
 			m_state = k_PluginState_Active;
 			return true;
 		}
-		m_state = k_PluginState_Failed;
-	}
-	return false;
-}
-
-bool Plugin::SafeLoad()
-{
-	__try {
-		return Load();
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER) {
-		m_state = k_PluginState_Failed;
 	}
 	return false;
 }

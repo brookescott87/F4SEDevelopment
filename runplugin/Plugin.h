@@ -24,8 +24,7 @@ public:
 
 	Plugin(const char *pluginPath);
 	const PluginInfo &GetInfo() { return m_info; }
+	int GetState() { return (int)m_state; }
 	bool Query();
-	bool SafeQuery();
 	bool Load();
-	bool SafeLoad();
 };
