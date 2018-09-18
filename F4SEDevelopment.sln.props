@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="UserMacros">
-    <Fallout4Path>G:\SteamLibrary\steamapps\common\Fallout 4</Fallout4Path>
+    <Fallout4Path>G:\SteamLibrary\steamapps\common\Fallout 4\</Fallout4Path>
     <F4SEPluginDir>$(Fallout4Path)Data\F4SE\Plugins\</F4SEPluginDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(ConfigurationType)|$(InstallType)'=='DynamicLibrary|F4SEPlugin'">
