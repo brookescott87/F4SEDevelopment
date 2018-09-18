@@ -53,3 +53,7 @@
 Release/
 Debug/
 x64/
+
+# Test directories
+
+game/
