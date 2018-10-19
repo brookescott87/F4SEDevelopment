@@ -18,9 +18,6 @@
     <ClCompile Include="doorstop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="steamantiantidebug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h">

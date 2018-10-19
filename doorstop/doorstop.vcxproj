@@ -95,7 +95,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="doorstop.cpp" />
-    <ClCompile Include="steamantiantidebug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
