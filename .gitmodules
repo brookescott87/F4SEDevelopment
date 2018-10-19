@@ -7,3 +7,6 @@
 [submodule "BetterConsole"]
 	path = BetterConsole
 	url = ../BetterConsole.git
+[submodule "MemoryModule"]
+	path = MemoryModule
+	url = ../MemoryModule
