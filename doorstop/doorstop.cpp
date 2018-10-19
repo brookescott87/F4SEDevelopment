@@ -43,8 +43,6 @@ void LogFileInit()
 	_MESSAGE(cbAnnounce);
 }
 
-void AntiDebugHook();
-
 bool Query(const F4SEInterface * f4se, PluginInfo * info)
 {
 	LogFileInit();
@@ -76,8 +74,6 @@ bool Query(const F4SEInterface * f4se, PluginInfo * info)
 	if (f4se->runtimeVersion > SUPPORTED_RUNTIME_VERSION) {
 		_MESSAGE("INFO: Newer game version (%08X) than target (%08X).", f4se->runtimeVersion, SUPPORTED_RUNTIME_VERSION);
 	}
-
-//	AntiDebugHook();
 
 	return true;
 }
