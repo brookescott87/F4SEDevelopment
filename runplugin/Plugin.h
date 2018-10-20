@@ -18,13 +18,22 @@ class Plugin
 		k_PluginState_Valid,
 		k_PluginState_Active = 1000
 	} m_state;
-public:
-	// internals
-	const HMODULE m_handle;
 
-	Plugin(const char *pluginPath);
+protected:
+    const HANDLE m_handle;
+    Plugin(HANDLE);
+
+public:
+    Plugin(const char *pluginPath);
 	const PluginInfo &GetInfo() { return m_info; }
 	int GetState() { return (int)m_state; }
 	bool Query();
 	bool Activate();
+    virtual INT_PTR BaseAddress() { return (INT_PTR)m_handle; }
+    virtual FARPROC ProcAddress(LPCSTR);
+};
+
+class MemoryPlugin : public Plugin {
+public:
+    MemoryPlugin(const char *, INT_PTR);
 };

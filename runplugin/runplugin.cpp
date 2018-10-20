@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	Plugin p("place.dll");
 
-	INT_PTR *qwModulePtr = (INT_PTR *)((INT_PTR)(p.m_handle) + 0x75d00);
+	INT_PTR *qwModulePtr = (INT_PTR *)(p.BaseAddress() + 0x75d00);
 	if (*qwModulePtr == qwProgramBase) {
 		_MESSAGE("Applying fixup to program references");
 		for (int i = 0; i < 6; ++i) {

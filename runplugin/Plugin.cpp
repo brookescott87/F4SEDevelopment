@@ -1,4 +1,5 @@
 #include "Plugin.h"
+#include "MemoryModule.h"
 
 static UInt32 GetReleaseIndex() { return 17; }
 static PluginHandle GetPluginHandle() { return (PluginHandle)1; }
@@ -20,12 +21,21 @@ const F4SEInterface g_F4SEInterface =
 	GetReleaseIndex
 };
 
+FARPROC Plugin::ProcAddress(LPCSTR lpProcName)
+{
+    return GetProcAddress((HMODULE)m_handle, lpProcName);
+}
+
 Plugin::Plugin(const char *pluginPath)
-	: m_handle(LoadLibraryA(pluginPath))
+    : Plugin((HANDLE)LoadLibraryA(pluginPath))
+{
+}
+
+Plugin::Plugin(HANDLE handle) : m_handle(handle)
 {
 	memset(&m_info, 0, sizeof(m_info));
-	m_query = (_F4SEPlugin_Query)GetProcAddress(m_handle, "F4SEPlugin_Query");
-	m_load = (_F4SEPlugin_Load)GetProcAddress(m_handle, "F4SEPlugin_Load");
+	m_query = (_F4SEPlugin_Query)ProcAddress("F4SEPlugin_Query");
+	m_load = (_F4SEPlugin_Load)ProcAddress("F4SEPlugin_Load");
 	if (m_query && m_load) {
 		m_state = k_PluginState_Initial;
 	}
@@ -58,3 +68,6 @@ bool Plugin::Activate()
 	}
 	return false;
 }
+
+MemoryPlugin::MemoryPlugin(const char *pluginPath, INT_PTR loadAddress = 0) :
+    Plugin((HANDLE)MemoryLoadLibraryFile(pluginPath, (LPVOID)loadAddress)) {}
