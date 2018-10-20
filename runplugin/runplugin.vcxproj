@@ -61,7 +61,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;WIN32;_WINDOWS;RUNTIME;RUNTIME_VERSION=0x010A06A0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)f4se-mirror\src;$(SolutionDir)f4se-mirror\src\f4se;$(SolutionDir)f4se-mirror\src\f4se\f4se;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)f4se-mirror\src;$(SolutionDir)f4se-mirror\src\f4se;$(SolutionDir)f4se-mirror\src\f4se\f4se;$(SolutionDir)MemoryModule\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <SupportJustMyCode>false</SupportJustMyCode>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -82,7 +82,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;WIN32;_WINDOWS;RUNTIME;RUNTIME_VERSION=0x010A06A0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)f4se-mirror\src;$(SolutionDir)f4se-mirror\src\f4se;$(SolutionDir)f4se-mirror\src\f4se\f4se;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)f4se-mirror\src;$(SolutionDir)f4se-mirror\src\f4se;$(SolutionDir)f4se-mirror\src\f4se\f4se;$(SolutionDir)MemoryModule\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>common/IPrefix.h</ForcedIncludeFiles>
     </ClCompile>
@@ -104,6 +104,9 @@
     </ProjectReference>
     <ProjectReference Include="..\f4se-mirror\src\f4se\f4se_common\f4se_common.vcxproj">
       <Project>{20c6411c-596f-4b85-be4e-8bc91f59d8a6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MemoryModule\MemoryModule.vcxproj">
+      <Project>{fdd2a9c1-46f7-4cc6-a659-a6f75483ce87}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
