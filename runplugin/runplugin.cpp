@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	}
 
 	p.Query();
-	p.Load();
+	p.Activate();
 
 	_MESSAGE("Plugin state: %d", p.GetState());
 }

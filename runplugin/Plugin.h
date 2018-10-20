@@ -26,5 +26,5 @@ public:
 	const PluginInfo &GetInfo() { return m_info; }
 	int GetState() { return (int)m_state; }
 	bool Query();
-	bool Load();
+	bool Activate();
 };

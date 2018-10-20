@@ -47,7 +47,7 @@ bool Plugin::Query()
 	return false;
 }
 
-bool Plugin::Load()
+bool Plugin::Activate()
 {
 	if (m_state == k_PluginState_Valid) {
 		m_state = k_PluginState_Failed;
