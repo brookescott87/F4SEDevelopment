@@ -10,3 +10,6 @@
 [submodule "MemoryModule"]
 	path = MemoryModule
 	url = ../MemoryModule
+[submodule "Relocation"]
+	path = Relocation
+	url = ../Relocation.git
