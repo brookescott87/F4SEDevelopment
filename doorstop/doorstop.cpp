@@ -28,10 +28,11 @@ char cbAnnounce[1024];
 void DllStartup(void *address)
 {
 	g_moduleHandle = address;
+    DWORD procId = GetCurrentProcessId();
 
 	snprintf(cbAnnounce, sizeof(cbAnnounce),
-		PLUGIN_NAME_SHORT " at %p query %p load %p\n", g_moduleHandle,
-		F4SEPlugin_Query, F4SEPlugin_Load);
+		PLUGIN_NAME_SHORT "[%x %u] at %p query %p load %p\n",
+        procId, procId, g_moduleHandle, F4SEPlugin_Query, F4SEPlugin_Load);
 }
 
 volatile int stopper = 0;
@@ -46,6 +47,10 @@ void LogFileInit()
 bool Query(const F4SEInterface * f4se, PluginInfo * info)
 {
 	LogFileInit();
+	    _MESSAGE("==================== DOORSTOP v%s ====================\n",
+        PLUGIN_VERSION_STRING);
+
+
 
 	// populate info structure
 	info->infoVersion = PluginInfo::kInfoVersion;
