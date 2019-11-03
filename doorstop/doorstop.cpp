@@ -44,10 +44,25 @@ void LogFileInit()
 	_MESSAGE(cbAnnounce);
 }
 
+#ifdef MEMPLUGIN
+#include <MemoryModule.h>
+
+#define MEMPLUGIN_FILE MEMPLUGIN ".xxx"
+#define MEMPLUGIN_PATH "Data\\F4SE\\Plugins\\" MEMPLUGIN_FILE
+
+struct MyMemPlugin {
+    LPVOID baseAddr;
+    _F4SEPlugin_Query query;
+    _F4SEPlugin_Load load;
+};
+
+MyMemPlugin g_MemPlugin;
+#endif
+
 bool Query(const F4SEInterface * f4se, PluginInfo * info)
 {
 	LogFileInit();
-	    _MESSAGE("==================== DOORSTOP v%s ====================\n",
+    _MESSAGE("==================== DOORSTOP v%s ====================\n",
         PLUGIN_VERSION_STRING);
 
 
@@ -74,11 +89,48 @@ bool Query(const F4SEInterface * f4se, PluginInfo * info)
 			GET_EXE_VERSION_SUB(SUPPORTED_RUNTIME_VERSION),
 			PLUGIN_NAME_LONG
 		);
+		return false;
 	}
-
+	
 	if (f4se->runtimeVersion > SUPPORTED_RUNTIME_VERSION) {
 		_MESSAGE("INFO: Newer game version (%08X) than target (%08X).", f4se->runtimeVersion, SUPPORTED_RUNTIME_VERSION);
 	}
+
+#ifdef MEMPLUGIN
+    HMEMORYMODULE hMemModule = NULL;
+
+    INT_PTR loadAddr = (INT_PTR)GetModuleHandle(NULL);
+    if (loadAddr)
+    {
+        std::string loadPath = GetRuntimeDirectory() + MEMPLUGIN_PATH;
+        loadAddr += 0x10000000ULL;
+        _MESSAGE("Attempting to load %s to %llX\n", loadPath.c_str(), loadAddr);
+        hMemModule = MemoryLoadLibraryFile(loadPath.c_str(), (LPVOID)loadAddr);
+        _MESSAGE("MemoryLoadLibraryFile returned %p\n", hMemModule);
+    }
+
+    if (!hMemModule)
+    {
+        _MESSAGE("Couldn't load memory module " MEMPLUGIN_FILE "\n");
+		return false;
+	}
+
+	g_MemPlugin.baseAddr = MemoryGetBaseAddress(hMemModule);
+	g_MemPlugin.query = (_F4SEPlugin_Query)MemoryGetProcAddress(hMemModule, "F4SEPlugin_Query");
+	g_MemPlugin.load = (_F4SEPlugin_Load)MemoryGetProcAddress(hMemModule, "F4SEPlugin_Load");
+
+	_MESSAGE("g_MemPlugin.handle = %p\n", hMemModule);
+	_MESSAGE("g_MemPlugin.base   = %p\n", g_MemPlugin.baseAddr);
+	_MESSAGE("g_MemPlugin.query  = %p\n", g_MemPlugin.query);
+	_MESSAGE("g_MemPlugin.load   = %p\n", g_MemPlugin.load);
+
+	_MESSAGE("Attempting to call g_MemPlugin.query...\n");
+
+	if (!g_MemPlugin.query(f4se, info))
+	{
+		return false;
+	}
+#endif
 
 	return true;
 }
@@ -87,7 +139,14 @@ bool Load(const F4SEInterface *f4se)
 {
 	_MESSAGE(PLUGIN_NAME_SHORT " load");
 
-	return true;
+#ifdef MEMPLUGIN
+    if (g_MemPlugin.load)
+    {
+        return g_MemPlugin.load(f4se);
+    }
+#endif
+
+	return false;
 }
 
 /* Exported functions */
